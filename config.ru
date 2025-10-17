@@ -20,11 +20,7 @@ end
 class Router
   def initialize(api_app, web_app)
     @api = api_app
-    @web = Rack::Static.new(web_app, {
-      :urls => ["/css", "/images", "/lib", "/swagger-ui.js"],
-      :root => "public/swagger-ui",
-      :index => 'index.html'
-    })
+    @web = web_app
   end
 
   def call(env)

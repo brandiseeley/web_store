@@ -38,7 +38,7 @@ end
 DatabaseCleaner.clean_with(:truncation)
 DatabaseCleaner.strategy = :truncation
 
-class MiniTest::Spec
+class Minitest::Spec
   before do
     DatabaseCleaner.start
   end

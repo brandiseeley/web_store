@@ -116,13 +116,6 @@ module WebStore
       end
     end
 
-    add_swagger_documentation \
-      hide_format: true,
-      info: {
-        title: "Web Store API",
-        description: "An example API server from Launch School."
-      }
-
     route :any, '*path' do
       status 404
       { status_code: 404, message: "Path not found."}

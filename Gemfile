@@ -16,7 +16,6 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'pg'
 gem 'rake', '10.3.2'
 gem 'racksh', '1.0.0'
-gem 'grape-swagger', '0.31.1'
 
 group :development do
   gem 'byebug'
