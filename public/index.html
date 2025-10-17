@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Store API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .endpoint {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .method {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-right: 10px;
+        }
+        
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+        .put { background: #fca130; color: white; }
+        .delete { background: #f93e3e; color: white; }
+        
+        .path {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .description {
+            margin: 15px 0;
+            color: #666;
+        }
+        
+        .params {
+            margin-top: 15px;
+        }
+        
+        .param {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .param-name {
+            font-weight: bold;
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .param-type {
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        .required {
+            color: #f93e3e;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .auth-required {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            display: block;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Web Store API</h1>
+            <p class="subtitle">RESTful API for managing products in an online store</p>
+        </header>
+
+        <div class="section">
+            <h2>Getting Started</h2>
+            <div class="info-box">
+                <strong>Base URL:</strong> <code style="display: inline; padding: 2px 6px;">/v1</code><br>
+                <strong>Format:</strong> JSON<br>
+                <strong>Authentication:</strong> Token-based (required for write operations)
+            </div>
+            
+            <h3>Authentication</h3>
+            <p>For creating, updating, or deleting resources, include the following header:</p>
+            <code>Authorization: token AUTH_TOKEN</code>
+        </div>
+
+        <div class="section">
+            <h2>Endpoints</h2>
+            
+            <div class="endpoint">
+                <div>
+                    <span class="method get">GET</span>
+                    <span class="path">/v1/products</span>
+                </div>
+                <p class="description">Fetch all products in the store.</p>
+                <h4>Example Request:</h4>
+                <code>curl https://your-domain.com/v1/products</code>
+                <h4>Example Response:</h4>
+                <code>[
+  {
+    "id": 1,
+    "name": "Magic Pen",
+    "sku": "magp100",
+    "price": 500
+  },
+  ...
+]</code>
+            </div>
+
+            <div class="endpoint">
+                <div>
+                    <span class="method get">GET</span>
+                    <span class="path">/v1/products/:id</span>
+                </div>
+                <p class="description">Fetch a single product by ID.</p>
+                <div class="params">
+                    <h4>Path Parameters:</h4>
+                    <div class="param">
+                        <span class="param-name">id</span>
+                        <span class="param-type">integer</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">Product ID</p>
+                    </div>
+                </div>
+                <h4>Example Request:</h4>
+                <code>curl https://your-domain.com/v1/products/1</code>
+                <h4>Example Response:</h4>
+                <code>{
+  "id": 1,
+  "name": "Magic Pen",
+  "sku": "magp100",
+  "price": 500
+}</code>
+            </div>
+
+            <div class="endpoint">
+                <div>
+                    <span class="method post">POST</span>
+                    <span class="path">/v1/products</span>
+                </div>
+                <div class="auth-required">
+                    🔒 Requires authentication
+                </div>
+                <p class="description">Create a new product.</p>
+                <div class="params">
+                    <h4>Request Body:</h4>
+                    <div class="param">
+                        <span class="param-name">name</span>
+                        <span class="param-type">string</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">Name of the product</p>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">sku</span>
+                        <span class="param-type">string</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">3+ character unique identifier for product</p>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">price</span>
+                        <span class="param-type">integer</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">Price of the product in cents</p>
+                    </div>
+                </div>
+                <h4>Example Request:</h4>
+                <code>curl -X POST https://your-domain.com/v1/products \
+  -H "Authorization: token AUTH_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Blue Widget",
+    "sku": "bluw200",
+    "price": 1200
+  }'</code>
+            </div>
+
+            <div class="endpoint">
+                <div>
+                    <span class="method put">PUT</span>
+                    <span class="path">/v1/products/:id</span>
+                </div>
+                <div class="auth-required">
+                    🔒 Requires authentication
+                </div>
+                <p class="description">Update an existing product.</p>
+                <div class="params">
+                    <h4>Path Parameters:</h4>
+                    <div class="param">
+                        <span class="param-name">id</span>
+                        <span class="param-type">integer</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">Product ID</p>
+                    </div>
+                    <h4>Request Body (all optional):</h4>
+                    <div class="param">
+                        <span class="param-name">name</span>
+                        <span class="param-type">string</span>
+                        <p style="margin-top: 5px; color: #666;">Name of the product</p>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">sku</span>
+                        <span class="param-type">string</span>
+                        <p style="margin-top: 5px; color: #666;">3+ character unique identifier for product</p>
+                    </div>
+                    <div class="param">
+                        <span class="param-name">price</span>
+                        <span class="param-type">integer</span>
+                        <p style="margin-top: 5px; color: #666;">Price of the product in cents</p>
+                    </div>
+                </div>
+                <h4>Example Request:</h4>
+                <code>curl -X PUT https://your-domain.com/v1/products/1 \
+  -H "Authorization: token AUTH_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "price": 1500
+  }'</code>
+            </div>
+
+            <div class="endpoint">
+                <div>
+                    <span class="method delete">DELETE</span>
+                    <span class="path">/v1/products/:id</span>
+                </div>
+                <div class="auth-required">
+                    🔒 Requires authentication
+                </div>
+                <p class="description">Remove a product from the system.</p>
+                <div class="params">
+                    <h4>Path Parameters:</h4>
+                    <div class="param">
+                        <span class="param-name">id</span>
+                        <span class="param-type">integer</span>
+                        <span class="required">required</span>
+                        <p style="margin-top: 5px; color: #666;">Product ID</p>
+                    </div>
+                </div>
+                <h4>Example Request:</h4>
+                <code>curl -X DELETE https://your-domain.com/v1/products/1 \
+  -H "Authorization: token AUTH_TOKEN"</code>
+            </div>
+
+            <div class="endpoint">
+                <div>
+                    <span class="method post">POST</span>
+                    <span class="path">/v1/reset</span>
+                </div>
+                <div class="auth-required">
+                    🔒 Requires authentication
+                </div>
+                <p class="description">Reset the store to its default state with seed data.</p>
+                <h4>Example Request:</h4>
+                <code>curl -X POST https://your-domain.com/v1/reset \
+  -H "Authorization: token AUTH_TOKEN"</code>
+                <h4>Example Response:</h4>
+                <code>{
+  "status_code": 200,
+  "message": "The web store has been reset!"
+}</code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Error Responses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>401</strong></td>
+                        <td>Unauthorized - Authentication required or invalid credentials</td>
+                    </tr>
+                    <tr>
+                        <td><strong>404</strong></td>
+                        <td>Not Found - Resource doesn't exist</td>
+                    </tr>
+                    <tr>
+                        <td><strong>415</strong></td>
+                        <td>Unsupported Media Type - Content-Type must be application/json</td>
+                    </tr>
+                    <tr>
+                        <td><strong>422</strong></td>
+                        <td>Unprocessable Entity - Validation error</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Error Response Format:</h3>
+            <code>{
+  "status_code": 422,
+  "message": "Name can't be blank"
+}</code>
+        </div>
+    </div>
+</body>
+</html>
+

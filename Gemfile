@@ -21,6 +21,7 @@ group :development do
   gem 'byebug'
   gem 'rerun'
   gem 'shotgun'
+  gem 'webrick'
 end
 
 group :test do

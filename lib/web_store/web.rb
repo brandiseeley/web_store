@@ -15,6 +15,10 @@ module WebStore
       params.slice("name", "price", "sku")
     end
 
+    get "/" do
+      send_file File.join(settings.public_folder, 'index.html')
+    end
+
     get "/products" do
       @products = Product.all
       erb :index, layout: !request.xhr?
