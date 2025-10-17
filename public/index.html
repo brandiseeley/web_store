@@ -270,7 +270,7 @@
                         <span class="param-name">price</span>
                         <span class="param-type">integer</span>
                         <span class="required">required</span>
-                        <p style="margin-top: 5px; color: #666;">Price of the product in cents</p>
+                        <p style="margin-top: 5px; color: #666;">Price of the product in cents (must be greater than 0)</p>
                     </div>
                 </div>
                 <h4>Example Request:</h4>
@@ -282,6 +282,8 @@
     "sku": "bluw200",
     "price": 1200
   }'</code>
+                <h4>Success Response:</h4>
+                <p style="color: #666;">Returns status code <strong>200</strong> with the created product object.</p>
             </div>
 
             <div class="endpoint">
@@ -315,7 +317,7 @@
                     <div class="param">
                         <span class="param-name">price</span>
                         <span class="param-type">integer</span>
-                        <p style="margin-top: 5px; color: #666;">Price of the product in cents</p>
+                        <p style="margin-top: 5px; color: #666;">Price of the product in cents (must be greater than 0)</p>
                     </div>
                 </div>
                 <h4>Example Request:</h4>
@@ -325,6 +327,8 @@
   -d '{
     "price": 1500
   }'</code>
+                <h4>Success Response:</h4>
+                <p style="color: #666;">Returns status code <strong>200</strong> with the updated product object.</p>
             </div>
 
             <div class="endpoint">
@@ -348,6 +352,8 @@
                 <h4>Example Request:</h4>
                 <code>curl -X DELETE https://your-domain.com/v1/products/1 \
   -H "Authorization: token AUTH_TOKEN"</code>
+                <h4>Response:</h4>
+                <p style="color: #666;">Returns status code <strong>204 No Content</strong> with no response body.</p>
             </div>
 
             <div class="endpoint">
@@ -390,7 +396,7 @@
                     </tr>
                     <tr>
                         <td><strong>415</strong></td>
-                        <td>Unsupported Media Type - Content-Type must be application/json</td>
+                        <td>Unsupported Media Type - POST, PUT, and PATCH requests must have application/json media type</td>
                     </tr>
                     <tr>
                         <td><strong>422</strong></td>
