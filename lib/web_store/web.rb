@@ -60,7 +60,7 @@ module WebStore
     post "/products/:id" do |id|
       require_user!
       @product = Product.find(id)
-      if @product.update_attributes(product_params)
+      if @product.update(product_params)
         if request.xhr?
           erb :show, layout: false
         else
